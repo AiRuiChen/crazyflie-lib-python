@@ -222,8 +222,8 @@ class Bootloader:
             datalist[t_data.addr] = bytearray(len(image))
 
             for i in range(0, page_number):
-                for x in range(0, int(t_data.page_size / 25.0)+1):
-                    tup = (t_data.addr, i+target['start_page'], x)
+                for x in range(0, int(t_data.page_size / 25.0) + 1):
+                    tup = (t_data.addr, i + target['start_page'], x)
                     batch_list.append(tup)
                     batch_index.append(1)
 
@@ -236,8 +236,8 @@ class Bootloader:
 
             # something is wrong
             if count > 7:
-                print("Go too long")
-                print("Remaining index")
+                print('Go too long')
+                print('Remaining index')
                 ctr = 0
                 for index in range(len(batch_index)):
                     if batch_index[index] == 1:
@@ -267,29 +267,29 @@ class Bootloader:
                             start_page = file_info[this_file][2]
 
                             place = (back_element +
-                                    (temp_pk[2]-start_page))*1024
+                                     (temp_pk[2] - start_page)) * 1024
 
                             if back_element == 1000:
-                                datalist[this_file][place: place+24] \
+                                datalist[this_file][place: place + 24] \
                                     = back_data[1][6:30]
                             else:
-                                datalist[this_file][place: place+25] \
+                                datalist[this_file][place: place + 25] \
                                     = back_data[1][6:]
 
-                            print("received: segment/page #{}/{}".format(
-                                  int(back_element/25),
-                                  temp_pk[2]-start_page))
+                            print('received: segment/page #{}/{}'.format(
+                                  int(back_element / 25),
+                                  temp_pk[2] - start_page))
 
                             if this_file == first_file:
                                 batch_index[
-                                    (int(back_element/25) +
-                                     (temp_pk[2]-start_page)*41)
+                                    (int(back_element / 25) +
+                                     (temp_pk[2] - start_page) * 41)
                                 ] = 0
                             else:
                                 batch_index[
-                                    (int(back_element/25) +
+                                    (int(back_element / 25) +
                                      (file_info[first_file][1] +
-                                      temp_pk[2]-start_page)*41)
+                                      temp_pk[2] - start_page) * 41)
                                 ] = 0
 
                         progress += factor
@@ -304,7 +304,7 @@ class Bootloader:
                 for x in range(len(target['data'])):
                     if target['data'][x] != datalist[target['target'].addr][x]:
                         return False
-        print("Success")
+        print('Success')
         return True
 
     def flash(self, filename, targets, verify):
@@ -400,8 +400,8 @@ class Bootloader:
             datalist[t_data.addr] = bytearray(len(image))
 
             for i in range(0, page_number):
-                for x in range(0, int(t_data.page_size / 25.0)+1):
-                    tup = (t_data.addr, i+target['start_page'], x)
+                for x in range(0, int(t_data.page_size / 25.0) + 1):
+                    tup = (t_data.addr, i + target['start_page'], x)
                     batch_list.append(tup)
                     batch_index.append(1)
 
@@ -414,8 +414,8 @@ class Bootloader:
 
             # something is wrong
             if count > 7:
-                print("Go too long")
-                print("Remaining index")
+                print('Go too long')
+                print('Remaining index')
                 ctr = 0
                 for index in range(len(batch_index)):
                     if batch_index[index] == 1:
@@ -446,29 +446,29 @@ class Bootloader:
                             start_page = file_info[this_file][2]
 
                             place = back_element + \
-                                (temp_pk[2] - start_page)*1024
+                                (temp_pk[2] - start_page) * 1024
 
                             if back_element == 1000:
-                                datalist[this_file][place: place+24]\
+                                datalist[this_file][place: place + 24]\
                                     = back_data[1][6:30]
                             else:
-                                datalist[this_file][place: place+25]\
+                                datalist[this_file][place: place + 25]\
                                     = back_data[1][6:]
 
-                            print("received: segment/page #{}/{}".format(
-                                  int(back_element/25),
-                                  temp_pk[2]-start_page))
+                            print('received: segment/page #{}/{}'.format(
+                                  int(back_element / 25),
+                                  temp_pk[2] - start_page))
 
                             if this_file == first_file:
                                 batch_index[
-                                    int(back_element/25) +
-                                    (temp_pk[2]-start_page)*41
+                                    int(back_element / 25) +
+                                    (temp_pk[2] - start_page) * 41
                                 ] = 0
                             else:
                                 batch_index[
-                                    int(back_element/25) +
+                                    int(back_element / 25) +
                                     (file_info[first_file][1] +
-                                     temp_pk[2]-start_page)*41
+                                     temp_pk[2] - start_page) * 41
                                 ] = 0
 
                         progress += factor
@@ -483,7 +483,7 @@ class Bootloader:
                 for x in range(len(target['data'])):
                     if target['data'][x] != datalist[target['target'].addr][x]:
                         return False
-        print("Verified, Success")
+        print('Verified, Success')
         return True
 
     def _filter_platform(self, files, platform_id):
@@ -593,10 +593,10 @@ class Bootloader:
                     self.progress_cb(
                         'Verification complete: ({}/{}) data page ({}/{}) \
                         is not successfully flashed '.format(
-                        current_file_number,
-                        total_files,
-                        i,
-                        page_number),
+                            current_file_number,
+                            total_files,
+                            i,
+                            page_number),
                         int(progress))
                 else:
                     print('\nError during verify operation (code %d). '
@@ -608,8 +608,8 @@ class Bootloader:
             self.progress_cb(
                 '({}/{}) Verification complete: \
                 This file is successfully flashed. '.format(
-                current_file_number,
-                total_files),
+                    current_file_number,
+                    total_files),
                 int(100))
         else:
             print('')
@@ -626,7 +626,7 @@ class Bootloader:
         factor = (100.0 * t_data.page_size) / len(image)
         progress = 0
         page_number = (int((len(image) - 1)
-                       / t_data.page_size)) + 1
+                           / t_data.page_size)) + 1
         if self.progress_cb:
             self.progress_cb(
                 '({}/{}) Starting...'.format(current_file_number,
@@ -716,7 +716,8 @@ class Bootloader:
                                 file_data_page = (
                                     image[current_page * t_data.page_size:])
                                 current_filedata_size = (
-                                    len(image) - current_page*t_data.page_size
+                                    len(image) - current_page *
+                                    t_data.page_size
                                 )
                             else:
                                 file_data_page = image[
@@ -809,12 +810,12 @@ class Bootloader:
                         data_page = bytearray()
                         file_page = bytearray()
                         current_page = \
-                            (int((len(image)-1) / t_data.page_size)) \
+                            (int((len(image) - 1) / t_data.page_size)) \
                             - (ctr - 1) + page
                         data_page = self._cload.batch_read_flash(
                             t_data.addr, start_page + current_page
                         )
-                        if ((current_page + 1)*t_data.page_size) > len(image):
+                        if ((current_page + 1) * t_data.page_size) > len(image):
                             file_data_page = image[
                                 current_page * t_data.page_size:
                             ]
