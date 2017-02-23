@@ -414,8 +414,8 @@ class Cloader:
                         # print(temp_pk)
                         back_element = int(temp_pk[3])
                         if list(temp_pk[: 2]) == [addr, 0x1C]:
-                            buff[back_element: back_element+25] = pk.data[6:]
-                            batch_index[int(back_element/25)] = 0
+                            buff[back_element: back_element + 25] = pk.data[6:]
+                            batch_index[int(back_element / 25)] = 0
         return buff[0:page_size]
 
     def batch_helper(self, addr, page, page_index):
